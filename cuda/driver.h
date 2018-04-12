@@ -9,6 +9,7 @@
 #include <ctime>
 #include <iostream>
 #include <stdlib.h>
+#include <string>
 
 #include "image.h"
 #include "seamcarver.h"

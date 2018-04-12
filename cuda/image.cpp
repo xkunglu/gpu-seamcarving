@@ -4,6 +4,7 @@
 //
 
 #include "image.h"
+#include <cmath>
 
 
 // namespace shortcuts
@@ -100,8 +101,10 @@ void Image::save(const char* path) const {
 void Image::readBitmap(FILE* file) {
   fread(&_file_header, sizeof(BitmapFileHeader), 1, file);
   fread(&_info_header, sizeof(BitmapInfoHeader), 1, file);
-  _width = _info_header.biWidth;
-  _height = -_info_header.biHeight; // Why do we have to negate?
+  _width = std::abs(_info_header.biWidth);
+  _height = std::abs(_info_header.biHeight); 
+  // why are some headers are positive some neg; example images from github were neg
+  // images output by ffmepg are positive
 
   // Read in the pixel data.
   int size = _width * _height;

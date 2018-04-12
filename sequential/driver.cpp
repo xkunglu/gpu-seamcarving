@@ -1,23 +1,36 @@
 //
 // 18645 - GPU Seamcarving
 // Authors: Adu Bhandaru, Matt Sarett
+// modified: Xkunglu
 //
 
 #include "driver.h"
+using namespace std;
 
 using std::cout;
 using std::endl;
 
 
 int main(int argc, char const *argv[]) {
+
+  for (int i = 0; i < argc; ++i) {
+    std::cout << i << argv[i] << std::endl;
+  }
+
+
   // Parse args
   if (argc < 3) {
-    cout << "Usage: driver.out -n $num_seams" << endl;
+    cout << "Usage: driver.out -n $num_seams [-i $image_name [-o $image_name]" << endl;
     exit(1);
   }
 
+  string img_file = "";
+  string out_file = "";
+  img_file = (argc >= 5) ? argv[4] : "../images/boat-1024.bmp";
+  out_file = (argc >= 7) ? argv[6] : "../outputs/sequential.bmp";
+
   // Load a bitmap image.
-  Image image("../images/boat-1024.bmp");
+  Image image(img_file);
 
   // Simple test to see if the image was loaded correctly.
   cout << ">> pixel (0, 1): " << endl;
@@ -42,8 +55,9 @@ int main(int argc, char const *argv[]) {
   cout << ">> Execution time ..." << endl;
   cout << "   cycles: " << exec_time << endl;
   cout << "   time: " << ((double)exec_time /  CLOCKS_PER_SEC) << "s" << endl;
+  cout << "   out file: " << out_file << endl;
 
   // Clean up and return normally.
-  image.save("../outputs/sequential.bmp");
+  image.save(out_file.c_str());
   return 0;
 }

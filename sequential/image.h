@@ -23,6 +23,7 @@ class Image {
   // getters
   int width() const;
   int height() const;
+
   const RGBQuad& get(int row, int col) const;
   const RGBQuad* operator [](int i) const;
 

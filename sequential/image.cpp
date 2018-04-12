@@ -4,6 +4,7 @@
 //
 
 #include "image.h"
+#include <cmath>
 
 
 // namespace shortcuts
@@ -103,8 +104,26 @@ void Image::save(const char* path) const {
 void Image::readBitmap(FILE* file) {
   fread(&_file_header, sizeof(BitmapFileHeader), 1, file);
   fread(&_info_header, sizeof(BitmapInfoHeader), 1, file);
-  _width = _info_header.biWidth;
-  _height = -_info_header.biHeight; // Why do we have to negate?
+  _width = std::abs(_info_header.biWidth);
+  _height = std::abs(_info_header.biHeight); // why some headers are positive some neg
+
+  unsigned short _planes = _info_header.biPlanes;
+  unsigned short _bitcount = _info_header.biBitCount;
+  unsigned int   _imsize = _info_header.biCompression;
+  int            _pixpm = _info_header.biXPelsPerMeter;
+  int            _piypm = _info_header.biYPelsPerMeter;
+  unsigned int   _colors = _info_header.biClrUsed;
+
+  cout << "   width: " << _width << endl;
+  cout << "   height: " << _height << endl;
+
+  cout << "   planes: " << _planes << endl;
+  cout << "   bitcount: " << _bitcount << endl;
+  cout << "   imsize: " << _imsize << endl;
+  cout << "   Y pix pm: " << _pixpm << endl;
+  cout << "   X pix pm: " << _piypm << endl;
+  cout << "   colors: " << _colors << endl;
+
 
   // Read in the pixel data.
   int size = _width * _height;
@@ -113,6 +132,5 @@ void Image::readBitmap(FILE* file) {
 
   // Print out some info.
   cout << ">> parsing bitmap ..." << endl;
-  cout << "   width: " << _width << endl;
-  cout << "   height: " << _height << endl;
+
 }

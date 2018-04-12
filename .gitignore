@@ -25,3 +25,5 @@ outputs/test.bmp
 outputs/sequential.bmp
 outputs/cuda.bmp
 
+__pycache__
+.ipynb_checkpoints
