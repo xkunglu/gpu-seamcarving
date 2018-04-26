@@ -82,6 +82,7 @@ def remove_seams(file_in, file_out, n_seams, gpu=False):
     _fcmd = [exe, '-n', str(n_seams), '-i', file_in, '-o', file_out]
     print(' '.join(_fcmd))
     proc = sp.Popen(_fcmd, stdin=sp.PIPE, stderr=sp.PIPE, stdout=sp.PIPE)
+    print(proc.stdout.read().decode("utf-8"))
     out, err = proc.communicate()
     return out, err
 

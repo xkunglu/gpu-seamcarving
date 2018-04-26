@@ -33,16 +33,16 @@ int main(int argc, char const *argv[]) {
   Image image(img_file.c_str());
 
   // Simple test to see if the image was loaded correctly.
-  cout << ">> pixel (0, 1): " << endl;
+  cout << ">> testing pixel (0, 1) ";
   const RGBQuad& p = image[0][1];
-  cout << "   R: " << (int)p.red << endl;
-  cout << "   G: " << (int)p.green << endl;
-  cout << "   B: " << (int)p.blue << endl;
+  cout << " R,G,B: [" << (int)p.red;
+  cout << ", " << (int)p.green;
+  cout << ", " << (int)p.blue << "]" << endl;
 
   // Clock start time.
   int num_seams = atoi(argv[2]);
-  cout << ">> init seamcarver" << endl;
-  cout << "   removing " << num_seams << " seams ..." << endl;
+  cout << ">> init seamcarver:";
+  cout << " removing " << num_seams << " seams" << endl;
   clock_t begin = clock();
 
   // Remove seams.
@@ -52,10 +52,10 @@ int main(int argc, char const *argv[]) {
   // Clock end time.
   clock_t end = clock();
   clock_t exec_time = end - begin;
-  cout << ">> Execution time ..." << endl;
-  cout << "   cycles: " << exec_time << endl;
-  cout << "   time: " << ((double)exec_time /  CLOCKS_PER_SEC) << "s" << endl;
-  cout << "   out file: " << out_file << endl;
+  cout << ">> Execution time:";
+  cout << ((double)exec_time /  CLOCKS_PER_SEC) << "s" << endl;
+  cout << "             cycles: " << exec_time << endl;
+  cout << "Out file: " << out_file << endl;
 
   // Clean up and return normally.
   image.save(out_file.c_str());

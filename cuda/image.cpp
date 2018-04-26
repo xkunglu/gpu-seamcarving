@@ -112,7 +112,7 @@ void Image::readBitmap(FILE* file) {
   fread(_pixels, sizeof(RGBQuad), size, file);
 
   // Print out some info.
-  cout << ">> parsing bitmap ..." << endl;
-  cout << "   width: " << _width << endl;
-  cout << "   height: " << _height << endl;
+  cout << ">> parsing bitmap ";
+  cout << "[" << _width;
+  cout << ", " << _height << "]" << endl;
 }
