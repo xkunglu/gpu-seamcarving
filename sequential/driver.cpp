@@ -30,7 +30,7 @@ int main(int argc, char const *argv[]) {
   out_file = (argc >= 7) ? argv[6] : "../outputs/sequential.bmp";
 
   // Load a bitmap image.
-  Image image(img_file);
+  Image image(img_file.c_str());
 
   // Simple test to see if the image was loaded correctly.
   cout << ">> pixel (0, 1): " << endl;
